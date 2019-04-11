@@ -14,7 +14,7 @@
 
 void	ft_get_token(t_filler *f)
 {
-	int		i;
+	int32_t	i;
 	char	*line;
 
 	i = -1;
@@ -33,8 +33,8 @@ void	ft_get_token(t_filler *f)
 
 void	ft_get_map(t_filler *f)
 {
-	int		i;
-	int		j;
+	int32_t	i;
+	int32_t	j;
 	char	*line;
 	char	**tmp;
 
@@ -73,10 +73,10 @@ void	ft_get_player(char *line, t_filler *f)
 	f->enemy_sym = line && line[10] == '1' ? 'X' : 'O';
 }
 
-void	ft_get_size(char *line, int *hight, int *width)
+void	ft_get_size(char *line, int32_t *hight, int32_t *width)
 {
-	char		**tmp;
-	int			i;
+	char	**tmp;
+	int32_t	i;
 
 	i = -1;
 	tmp = ft_strsplit(line, ' ');

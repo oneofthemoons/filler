@@ -4,7 +4,7 @@ HEADER = ../inc/filler.h
 
 FLAGS = -Wall -Werror -Wextra -fsanitize=address
 
-SOURCES = main.c set_data.c algo.c layout.c
+SOURCES = main.c set_data.c algo.c layout.c render.c
 
 SRCS = $(addprefix $(SOURCES))
 

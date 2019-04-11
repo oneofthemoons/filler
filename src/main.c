@@ -14,9 +14,9 @@
 
 void	ft_make_heat_map(t_filler *f)
 {
-	int i;
-	int	j;
-	int	n;
+	int32_t i;
+	int32_t	j;
+	int32_t	n;
 
 	n = f->hight > f->width ? f->hight : f->width;
 	while (n--)
@@ -33,23 +33,23 @@ void	ft_make_heat_map(t_filler *f)
 
 void	ft_create_maps(t_filler *f)
 {
-	int	i;
+	int32_t	i;
 
 	f->map = (char**)malloc(sizeof(char*) * f->hight);
 	i = -1;
 	ft_bzero(f->map, f->hight * sizeof(char*));
 	while (++i < f->hight)
 		f->map[i] = (char*)malloc(sizeof(char) * f->width);
-	f->n_map = (int**)malloc(sizeof(int*) * f->hight);
+	f->n_map = (int32_t**)malloc(sizeof(int32_t*) * f->hight);
 	i = -1;
-	ft_bzero(f->n_map, f->hight * sizeof(int*));
+	ft_bzero(f->n_map, f->hight * sizeof(int32_t*));
 	while (++i < f->hight)
-		f->n_map[i] = (int*)malloc(sizeof(int) * f->width);
+		f->n_map[i] = (int32_t*)malloc(sizeof(int32_t) * f->width);
 }
 
 void	ft_free_maps(t_filler *f)
 {
-	int i;
+	int32_t i;
 
 	i = -1;
 	while (++i < f->hight)
@@ -72,39 +72,16 @@ void	ft_set_base(t_filler *f)
 	ft_create_maps(f);
 }
 
-int		ft_expose_render(void *filler)
-{
-	char		*line;
-	t_filler	*f;
-
-	f = (t_filler*)filler;
-	get_next_line(0, &line);
-	ft_strdel(&line);
-	ft_get_map(f);
-	ft_draw_map(f);
-	ft_make_heat_map(f);
-	get_next_line(0, &line);
-	ft_get_size(line, &(f->token.hight), &(f->token.width));
-	ft_strdel(&line);
-	ft_get_token(f);
-	ft_find_place(f);
-	if (get_next_line(0, &line) < 1)
-	{
-		ft_free_maps(f);
-		exit(0);
-	}
-	if (line)
-		ft_strdel(&line);
-	return (0);
-}
-
-int		main(void)
+int32_t	main(void)
 {
 	char		*line;
 	t_filler	f;
 
 	ft_set_base(&f);
 	ft_layout_init(&f);
+	f.draw = 1;
+	mlx_hook(f.layout.win_ptr, 17, 0, ft_close, (void*)&f);
+	mlx_key_hook(f.layout.win_ptr, ft_key, (void*)&f);
 	mlx_loop_hook(f.layout.mlx_ptr, ft_expose_render, (void*)&f);
 	mlx_loop(f.layout.mlx_ptr);
 }

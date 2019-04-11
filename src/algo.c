@@ -12,9 +12,9 @@
 
 #include "../inc/filler.h"
 
-void	ft_encircling_point(t_filler *f, int y, int x)
+void	ft_encircling_point(t_filler *f, int32_t y, int32_t x)
 {
-	int	cur;
+	int32_t	cur;
 
 	cur = f->n_map[y][x];
 	if (f->n_map[y][x] < 0)
@@ -37,11 +37,11 @@ void	ft_encircling_point(t_filler *f, int y, int x)
 		f->n_map[y + 1][x + 1] = cur + 1;
 }
 
-int		ft_get_sum(t_filler *f, int y, int x)
+int32_t	ft_get_sum(t_filler *f, int32_t y, int32_t x)
 {
-	int	i;
-	int	j;
-	int sum;
+	int32_t	i;
+	int32_t	j;
+	int32_t sum;
 
 	sum = 0;
 	i = -1;
@@ -60,9 +60,9 @@ int		ft_get_sum(t_filler *f, int y, int x)
 	return (sum);
 }
 
-void	ft_set_bcoor(t_filler *f, int i, int j, t_pos *mn)
+void	ft_set_bcoor(t_filler *f, int32_t i, int32_t j, t_pos *mn)
 {
-	int		tmp;
+	int32_t	tmp;
 
 	tmp = ft_get_sum(f, i, j);
 	if (mn->min_sum == -1 || mn->min_sum > tmp)
@@ -72,10 +72,10 @@ void	ft_set_bcoor(t_filler *f, int i, int j, t_pos *mn)
 	}
 }
 
-void	ft_get_state(t_filler *f, t_state *st, int i, int j)
+void	ft_get_state(t_filler *f, t_state *st, int32_t i, int32_t j)
 {
-	int	k;
-	int	l;
+	int32_t	k;
+	int32_t	l;
 
 	k = -1;
 	while (++k < f->token.hight)
@@ -97,9 +97,9 @@ void	ft_get_state(t_filler *f, t_state *st, int i, int j)
 
 void	ft_find_place(t_filler *f)
 {
-	int		i;
-	int		j;
-	int		tmp;
+	int32_t	i;
+	int32_t	j;
+	int32_t	tmp;
 	t_pos	mn;
 	t_state	st;
 
